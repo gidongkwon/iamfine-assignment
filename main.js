@@ -10,5 +10,5 @@ store.addEventListener('added', (e) => {
 })
 
 addButton.addEventListener('click', () => {
-  store.addPair(idInput.value, valueInput.value);
+  store.addPair(idInput.valueAsNumber, valueInput.valueAsNumber);
 });

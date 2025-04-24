@@ -14,6 +14,14 @@ class Store extends EventTarget {
   }
 
   addPair(id, value) {
+    if (typeof id !== "number") {
+      console.error("id는 숫자여야 합니다.");
+      return;
+    }
+    if (typeof value !== "number") {
+      console.error("value는 숫자여야 합니다.");
+      return;
+    }
     this.data.push({ id, value });
 
     this.dispatchEvent(new CustomEvent('added', {
