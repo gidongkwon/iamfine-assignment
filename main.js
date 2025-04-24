@@ -35,7 +35,7 @@ for (const tabList of tabLists) {
       tabList
         .querySelectorAll('[aria-selected="true"]')
         .forEach((t) => t.setAttribute("aria-selected", "false"));
-      
+
       // 새로 선택한 탭의 aria-selected만 true로
       tab.setAttribute("aria-selected", "true");
 
