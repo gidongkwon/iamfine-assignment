@@ -37,4 +37,8 @@ class Store extends EventTarget {
       detail: removed
     }));
   }
+
+  getAsJSON() {
+    return JSON.stringify(this.data, null, 2);
+  }
 }
