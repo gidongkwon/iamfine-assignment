@@ -1,13 +1,10 @@
 class EditableTable extends HTMLElement {
-  constructor() {
-    super();
-
+  connectedCallback() {
     const template = document.querySelector("#editable-table-template");
-    const shadow = this.attachShadow({ mode: "open" });
-    shadow.appendChild(template.content);
+    this.appendChild(template.content);
 
-    this.tableBody = this.shadowRoot.querySelector("tbody");
-    this.rowTemplate = this.shadowRoot.querySelector("#row-template");
+    this.tableBody = this.querySelector("tbody");
+    this.rowTemplate = this.querySelector("#row-template");
   }
 
   addRow(pair) {
@@ -32,7 +29,7 @@ class EditableTable extends HTMLElement {
   }
 
   removeRow(id) {
-    const trToRemove = this.shadowRoot.querySelector(`tr[data-id="${id}"]`);
+    const trToRemove = this.querySelector(`tr[data-id="${id}"]`);
     this.tableBody.removeChild(trToRemove);
   }
 }
