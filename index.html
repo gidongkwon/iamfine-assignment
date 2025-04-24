@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>차트</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="chart-view.js" defer></script>
+  <script src="editable-table.js" defer></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <header>아이엠파인 SD팀 지원자 권기동</header>
+  <main>
+    <chart-view></chart-view>
+    <section>
+      <div role="tablist">
+        <button id="trigger-tab-data" type="button" role="tab">데이터</button>
+        <button id="trigger-tab-json" type="button" role="tab">고급(JSON)</button>
+      </div>
+      <editable-table>
+        차트에 표시할 값을 추가해보세요.
+      </editable-table>
+      <section aria-labelledby="trigger-tab-data">
+        <input placeholder="ID">
+        <input placeholder="값">
+        <button>추가</button>
+      </section>
+      <section aria-labelledby="trigger-tab-json">
+        <h2>값 고급 편집</h2>
+        <textarea>
+        </textarea>
+      </section>
+    </section>
+  </main>
+
+  <template id="chart-view-template">
+    Chart
+  </template>
+
+  <template id="editable-table-template">
+    <table>
+      <th>
+        <td>ID</td>
+        <td>값</td>
+      </th>
+      <tbody>
+      </tbody>
+    </table>
+  </template>
+</body>
+</html>

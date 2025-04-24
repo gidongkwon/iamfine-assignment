@@ -1,0 +1,9 @@
+header {
+  margin-left: auto;
+  width: fit-content;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
