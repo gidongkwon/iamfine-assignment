@@ -1,67 +1,90 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>차트</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="store.js" defer></script>
-  <script src="chart-view.js" defer></script>
-  <script src="editable-table.js" defer></script>
-  <script src="main.js" defer></script>
-</head>
-<body>
-  <header>아이엠파인 SD팀 지원자 권기동</header>
-  <main>
-    <chart-view></chart-view>
-    <section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>차트</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="store.js" defer></script>
+    <script src="chart-view.js" defer></script>
+    <script src="editable-table.js" defer></script>
+    <script src="main.js" defer></script>
+  </head>
+
+  <body>
+    <header>아이엠파인 SD팀 지원자 권기동</header>
+    <main>
+      <chart-view></chart-view>
       <section>
-        <input id="id-input" type="number" placeholder="ID">
-        <input id="value-input" type="number" placeholder="값">
-        <button id="add-button">추가</button>
+        <section>
+          <input id="id-input" type="number" placeholder="ID" />
+          <input id="value-input" type="number" placeholder="값" />
+          <button id="add-button">추가</button>
+        </section>
+        <div role="tablist">
+          <button
+            id="trigger-tab-data"
+            aria-selected="true"
+            aria-controls="panel-data"
+            type="button"
+            role="tab"
+          >
+            데이터
+          </button>
+          <button
+            id="trigger-tab-json"
+            aria-selected="false"
+            aria-controls="panel-json"
+            type="button"
+            role="tab"
+          >
+            고급(JSON)
+          </button>
+        </div>
+        <section
+          id="panel-data"
+          role="tabpanel"
+          aria-labelledby="trigger-tab-data"
+        >
+          <editable-table id="main-table">
+            차트에 표시할 값을 추가해보세요.
+          </editable-table>
+        </section>
+        <section
+          id="panel-json"
+          role="tabpanel"
+          aria-labelledby="trigger-tab-json"
+          hidden
+        >
+          <textarea id="json-textarea"></textarea>
+        </section>
       </section>
-      <div role="tablist">
-        <button id="trigger-tab-data" type="button" role="tab">데이터</button>
-        <button id="trigger-tab-json" type="button" role="tab">고급(JSON)</button>
-      </div>
-      <section role="tabpanel" aria-labelledby="trigger-tab-data">
-        <editable-table id="main-table">
-          차트에 표시할 값을 추가해보세요.
-        </editable-table>
-      </section>
-      <section role="tabpanel" aria-labelledby="trigger-tab-json">
-        <textarea id="json-textarea"></textarea>
-      </section>
-    </section>
-  </main>
+    </main>
 
-  <template id="chart-view-template">
-    Chart
-  </template>
+    <template id="chart-view-template"> Chart </template>
 
-  <template id="editable-table-template">
-    <table>
-      <thead>
+    <template id="editable-table-template">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>값</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <template id="row-template">
         <tr>
-          <th>ID</th>
-          <th>값</th>
+          <td></td>
+          <td>
+            <input type="number" />
+          </td>
+          <td>
+            <button type="button">삭제</button>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-
-    <template id="row-template">
-      <tr>
-        <td></td>
-        <td>
-          <input type="number">
-        </td>
-        <td>
-          <button type="button">삭제</button>
-        </td>
-      </tr>
+      </template>
     </template>
-  </template>
-</body>
+  </body>
 </html>
