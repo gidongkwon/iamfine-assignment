@@ -28,4 +28,13 @@ class Store extends EventTarget {
       detail: { id, value }
     }));
   }
+
+  removePair(id) {
+    const indexToRemove = this.data.findIndex((pair) => pair.id === id);
+    const [removed] = this.data.splice(indexToRemove, 1);
+    
+    this.dispatchEvent(new CustomEvent('removed', {
+      detail: removed
+    }));
+  }
 }

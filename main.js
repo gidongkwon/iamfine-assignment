@@ -7,7 +7,15 @@ const editableTable = document.querySelector('#main-table');
 
 store.addEventListener('added', (e) => {
   editableTable.addRow(e.detail);
-})
+});
+
+store.addEventListener('removed', (e) => {
+  editableTable.removeRow(e.detail.id);
+});
+
+editableTable.addEventListener('delete-clicked', (e) => {
+  store.removePair(e.detail.id);
+});
 
 addButton.addEventListener('click', () => {
   store.addPair(idInput.valueAsNumber, valueInput.valueAsNumber);
