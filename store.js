@@ -56,6 +56,12 @@ class Store extends EventTarget {
     for (const pair of pairs) {
       this._data.set(pair.id, pair.value);
     }
+
+    this.dispatchEvent(
+      new CustomEvent("changed", {
+        detail: [...pairs],
+      })
+    );
   }
 
   getAsJSON() {

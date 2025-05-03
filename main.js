@@ -3,11 +3,14 @@ const addButton = document.querySelector("#add-button");
 const idInput = document.querySelector("#id-input");
 const valueInput = document.querySelector("#value-input");
 
+/**
+ * @type {EditableTable}
+ */
 const editableTable = document.querySelector("#main-table");
 const jsonTextArea = document.querySelector("#json-textarea");
 
 store.addEventListener("added", (e) => {
-  editableTable.addRow(e.detail);
+  editableTable.addRow(e.detail, -1);
   jsonTextArea.value = store.getAsJSON();
 });
 
@@ -16,12 +19,37 @@ store.addEventListener("removed", (e) => {
   jsonTextArea.value = store.getAsJSON();
 });
 
+store.addEventListener("changed", (e) => {
+  jsonTextArea.value = store.getAsJSON();
+});
+
+store.addEventListener("overwritten", (e) => {
+  editableTable.clear();
+  for (const pair of e.detail) {
+    editableTable.addRow(pair, -1);
+  }
+  jsonTextArea.value = store.getAsJSON();
+});
+
 editableTable.addEventListener("delete-clicked", (e) => {
-  store.removePair(e.detail.id);
+  store.removeEntry(e.detail.id);
 });
 
 addButton.addEventListener("click", () => {
-  store.addPair(idInput.valueAsNumber, valueInput.valueAsNumber);
+  store.addEntry(idInput.valueAsNumber, valueInput.valueAsNumber);
+});
+
+const textAreaApplyButton = document.querySelector("#panel-json .apply-button");
+const tableApplyButton = document.querySelector("#panel-data .apply-button");
+textAreaApplyButton.addEventListener("click", () => {
+  try {
+    store.setJSON(jsonTextArea.value);
+  } catch (e) {
+    alert(e.message);
+  }
+});
+tableApplyButton.addEventListener("click", () => {
+  store.changeEntries(editableTable.getDirtyRowsAsPair(true));
 });
 
 // 탭 처리

@@ -8,7 +8,7 @@
   --color-background-element-hover: var(--color-background-4);
   --color-primary: #46a758;
   --color-primary-hover: #3e9b4f;
-  --color-text-on-primary: #e6f4fe;
+  --color-text-primary: #e6f4fe;
   --border: 1px solid #94ce9a;
   --border-radius-1: 8px;
   --border-radius-2: 16px;
@@ -43,7 +43,7 @@ main {
 button {
   appearance: none;
   background-color: var(--color-primary);
-  color: var(--color-text-on-primary);
+  color: var(--color-text-primary);
   border: none;
   border-radius: var(--border-radius-1);
   padding: 8px 16px;
@@ -91,15 +91,14 @@ chart-view {
   background-color: var(--color-background-element-hover);
 }
 
-.panel {
-  border: var(--border);
+.data-panel {
+  box-shadow: 0 0 100px var(--color-background-3);
   border-radius: var(--border-radius-2);
   padding: 16px;
 }
 
-.data-panel {
-  border: none;
-  box-shadow: 0 0 100px var(--color-background-3);
+.add-data-container {
+  border-top: var(--border);
 }
 
 #id-input {
@@ -108,8 +107,10 @@ chart-view {
 
 editable-table table {
   width: 100%;
-  border: var(--border);
   border-radius: var(--border-radius-1);
+  background: white;
+  box-shadow: 0 0 50px var(--color-background-3);
+  border-collapse: collapse;
 }
 editable-table tr {
   margin-inline: var(--spacing-2);

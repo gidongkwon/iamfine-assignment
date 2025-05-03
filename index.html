@@ -16,7 +16,7 @@
     <main>
       <chart-view></chart-view>
       <section>
-        <div class="data-panel panel">
+        <div class="data-panel">
           <div role="tablist">
             <button
               id="trigger-tab-data"
@@ -51,6 +51,7 @@
             hidden
           >
             <textarea id="json-textarea"></textarea>
+            <button class="apply-button" type="button">변경사항 적용</button>
           </section>
         </div>
       </section>
@@ -69,6 +70,13 @@
         <tbody></tbody>
         <tfoot>
           <tr>
+            <td></td>
+            <td>
+              <button class="apply-button" type="button">변경사항 적용</button>
+            </td>
+            <td></td>
+          </tr>
+          <tr class="add-data-container">
             <td>
               <input id="id-input" type="number" placeholder="ID" />
             </td>
@@ -76,7 +84,7 @@
               <input id="value-input" type="number" placeholder="값" />
             </td>
             <td>
-              <button id="add-button">추가</button>
+              <button id="add-button" type="button">추가</button>
             </td>
           </tr>
         </tfoot>
