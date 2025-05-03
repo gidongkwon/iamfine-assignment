@@ -16,48 +16,43 @@
     <main>
       <chart-view></chart-view>
       <section>
-        <section>
-          <input id="id-input" type="number" placeholder="ID" />
-          <input id="value-input" type="number" placeholder="값" />
-          <button id="add-button">추가</button>
-        </section>
-        <div role="tablist">
-          <button
-            id="trigger-tab-data"
-            aria-selected="true"
-            aria-controls="panel-data"
-            type="button"
-            role="tab"
+        <div class="data-panel panel">
+          <div role="tablist">
+            <button
+              id="trigger-tab-data"
+              aria-selected="true"
+              aria-controls="panel-data"
+              type="button"
+              role="tab"
+            >
+              편집
+            </button>
+            <button
+              id="trigger-tab-json"
+              aria-selected="false"
+              aria-controls="panel-json"
+              type="button"
+              role="tab"
+            >
+              고급 편집(JSON)
+            </button>
+          </div>
+          <section
+            id="panel-data"
+            role="tabpanel"
+            aria-labelledby="trigger-tab-data"
           >
-            데이터
-          </button>
-          <button
-            id="trigger-tab-json"
-            aria-selected="false"
-            aria-controls="panel-json"
-            type="button"
-            role="tab"
+            <editable-table id="main-table"></editable-table>
+          </section>
+          <section
+            id="panel-json"
+            role="tabpanel"
+            aria-labelledby="trigger-tab-json"
+            hidden
           >
-            고급(JSON)
-          </button>
+            <textarea id="json-textarea"></textarea>
+          </section>
         </div>
-        <section
-          id="panel-data"
-          role="tabpanel"
-          aria-labelledby="trigger-tab-data"
-        >
-          <editable-table id="main-table">
-            차트에 표시할 값을 추가해보세요.
-          </editable-table>
-        </section>
-        <section
-          id="panel-json"
-          role="tabpanel"
-          aria-labelledby="trigger-tab-json"
-          hidden
-        >
-          <textarea id="json-textarea"></textarea>
-        </section>
       </section>
     </main>
 
@@ -72,6 +67,19 @@
           </tr>
         </thead>
         <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <input id="id-input" type="number" placeholder="ID" />
+            </td>
+            <td>
+              <input id="value-input" type="number" placeholder="값" />
+            </td>
+            <td>
+              <button id="add-button">추가</button>
+            </td>
+          </tr>
+        </tfoot>
       </table>
 
       <template id="row-template">

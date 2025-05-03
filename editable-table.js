@@ -29,7 +29,7 @@ class EditableTable extends HTMLElement {
   }
 
   removeRow(id) {
-    const trToRemove = this.querySelector(`tr[data-id="${id}"]`);
+    const trToRemove = this.querySelector(`tbody tr[data-id="${id}"]`);
     this.tableBody.removeChild(trToRemove);
   }
 }
