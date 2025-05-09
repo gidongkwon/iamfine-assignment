@@ -131,6 +131,10 @@ editable-table td input {
   width: calc(100% - var(--spacing-1) * 2);
   padding: var(--spacing-1);
 }
+editable-table .delete-button {
+  background-color: transparent;
+  color: var(--color-text);
+}
 
 chart-view {
   z-index: 1;
