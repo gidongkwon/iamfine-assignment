@@ -19,14 +19,11 @@ class Store extends EventTarget {
   }
 
   addEntry(id, value) {
-    if (typeof id !== "number" || isNaN(id)) {
-      throw new TypeError("id는 숫자여야 합니다.");
-    }
-    if (typeof value !== "number" || isNaN(value)) {
-      throw new TypeError("value는 숫자여야 합니다.");
-    }
+    this._validateId(id);
+    this._validateValue(value);
+
     if (this._data.has(id)) {
-      throw new Error("중복된 id입니다.");
+      throw new Error(`중복된 id입니다: ${id}`);
     }
     this._data.set(id, value);
 
@@ -92,9 +89,9 @@ class Store extends EventTarget {
     }
     const isEveryElementValid = pairs.every((v) => {
       const isObject = typeof v === "object";
-      const hasValidId = Object.hasOwn(v, "id") && typeof v.id === "number";
+      const hasValidId = Object.hasOwn(v, "id") && this._validateId(v.id);
       const hasValidValue =
-        Object.hasOwn(v, "value") && typeof v.value === "number";
+        Object.hasOwn(v, "value") && this._validateValue(v.value);
 
       return isObject && hasValidId && hasValidValue;
     });
@@ -103,5 +100,42 @@ class Store extends EventTarget {
         "배열 내부의 값은 { id: number, value: number } 형식이어야 합니다."
       );
     }
+
+    const duplicatedIds = this._getDuplicatedIds(pairs);
+    const hasDuplicates = duplicatedIds.length > 0;
+    if (hasDuplicates) {
+      throw new Error(`중복된 id입니다: ${duplicatedIds.join(", ")}`);
+    }
+  }
+
+  _getDuplicatedIds(pairs) {
+    const set = new Set();
+    const result = [];
+    for (const pair of pairs) {
+      if (set.has(pair.id)) {
+        result.push(pair.id);
+      } else {
+        set.add(pair.id);
+      }
+    }
+
+    return result;
+  }
+
+  _validateId(id) {
+    if (typeof id !== "number" || isNaN(id)) {
+      throw new TypeError("id는 숫자여야 합니다.");
+    }
+    return true;
+  }
+
+  _validateValue(value) {
+    if (typeof value !== "number" || isNaN(value)) {
+      throw new TypeError("value는 숫자여야 합니다.");
+    }
+    if (value < 0) {
+      throw new Error("value는 양수여야 합니다.");
+    }
+    return true;
   }
 }
