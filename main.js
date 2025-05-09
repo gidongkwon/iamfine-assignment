@@ -45,9 +45,9 @@ editableTable.addEventListener("delete-clicked", (e) => {
 });
 
 addButton.addEventListener("click", () => {
-try {
-  store.addEntry(idInput.valueAsNumber, valueInput.valueAsNumber);
-idInput.value = "";
+  try {
+    store.addEntry(idInput.valueAsNumber, valueInput.valueAsNumber);
+    idInput.value = "";
     valueInput.value = "";
   } catch (e) {
     alert(e.message);
@@ -68,7 +68,7 @@ editableTable.addEventListener("row-changed", () => {
 });
 tableApplyButton.addEventListener("click", () => {
   store.changeEntries(editableTable.getDirtyRowsAsPair(true));
-tableApplyButton.setAttribute("hidden", "hidden");
+  tableApplyButton.setAttribute("hidden", "hidden");
 });
 
 // 탭 처리
@@ -89,7 +89,7 @@ for (const tabList of tabLists) {
       // 모든 탭 패널 숨기기
       document
         .querySelectorAll('[role="tabpanel"]')
-        .forEach((t) => t.setAttribute("hidden", true));
+        .forEach((t) => t.setAttribute("hidden", "hidden"));
 
       // 새로 선택한 탭 패널 표시
       document
