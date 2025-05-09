@@ -79,6 +79,11 @@ input:focus {
   outline-offset: -2px;
 }
 
+.data-panel {
+  box-shadow: 0 0 100px var(--color-background-3);
+  border-radius: var(--border-radius-3);
+  padding: 16px;
+}
 .data-panel [role="tablist"] {
   margin-bottom: var(--spacing-3);
 }
@@ -91,20 +96,9 @@ input:focus {
 [role="tab"]:hover {
   background-color: var(--color-background-element-hover);
 }
-
 [role="tab"][aria-selected="true"] {
   font-weight: bold;
   background-color: var(--color-background-element-hover);
-}
-
-.data-panel {
-  box-shadow: 0 0 100px var(--color-background-3);
-  border-radius: var(--border-radius-3);
-  padding: 16px;
-}
-
-.add-data-container {
-  border-top: var(--border);
 }
 
 #id-input {
@@ -200,11 +194,6 @@ chart-view .y-tick::before {
   width: 4px;
   height: 1px;
   border-top: 1px solid currentColor;
-}
-/* HACK: 1px 보정 */
-chart-view .y-tick:last-child::before {
-  border-top: none;
-  border-bottom: 1px solid currentColor;
 }
 chart-view .x-axis {
   grid-area: x-axis;
