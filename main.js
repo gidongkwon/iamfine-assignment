@@ -44,6 +44,26 @@ editableTable.addEventListener("delete-clicked", (e) => {
   store.removeEntry(e.detail.id);
 });
 
+idInput.addEventListener("input", (e) => {
+  const idCandidate = e.target.valueAsNumber;
+  try {
+    store.validateId(idCandidate);
+    e.target.setCustomValidity("");
+  } catch (error) {
+    e.target.setCustomValidity(error.message);
+    e.target.reportValidity();
+  }
+});
+valueInput.addEventListener("input", (e) => {
+  const valueCandidate = e.target.valueAsNumber;
+  try {
+    store.validateValue(valueCandidate);
+    e.target.setCustomValidity("");
+  } catch (error) {
+    e.target.setCustomValidity(error.message);
+    e.target.reportValidity();
+  }
+});
 addButton.addEventListener("click", () => {
   try {
     store.addEntry(idInput.valueAsNumber, valueInput.valueAsNumber);

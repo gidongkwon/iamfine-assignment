@@ -19,12 +19,9 @@ class Store extends EventTarget {
   }
 
   addEntry(id, value) {
-    this._validateId(id);
-    this._validateValue(value);
+    this.validateId(id);
+    this.validateValue(value);
 
-    if (this._data.has(id)) {
-      throw new Error(`중복된 id입니다: ${id}`);
-    }
     this._data.set(id, value);
 
     this.dispatchEvent(
@@ -48,7 +45,7 @@ class Store extends EventTarget {
   }
 
   changeEntries(pairs) {
-    this._validatePairs(pairs);
+    this.validatePairs(pairs);
 
     for (const pair of pairs) {
       this._data.set(pair.id, pair.value);
@@ -74,7 +71,7 @@ class Store extends EventTarget {
    */
   setJSON(json) {
     const parsedPairs = JSON.parse(json);
-    this._validatePairs(parsedPairs);
+    this.validatePairs(parsedPairs);
     this._data = new Map(parsedPairs.map((v) => [v.id, v.value]));
     this.dispatchEvent(
       new CustomEvent("overwritten", {
@@ -83,15 +80,15 @@ class Store extends EventTarget {
     );
   }
 
-  _validatePairs(pairs) {
+  validatePairs(pairs) {
     if (!Array.isArray(pairs)) {
       throw new TypeError("제공된 값이 배열 형식이 아닙니다.");
     }
     const isEveryElementValid = pairs.every((v) => {
       const isObject = typeof v === "object";
-      const hasValidId = Object.hasOwn(v, "id") && this._validateId(v.id);
+      const hasValidId = Object.hasOwn(v, "id") && this._ensureIdIsNumber(v.id);
       const hasValidValue =
-        Object.hasOwn(v, "value") && this._validateValue(v.value);
+        Object.hasOwn(v, "value") && this.validateValue(v.value);
 
       return isObject && hasValidId && hasValidValue;
     });
@@ -122,14 +119,25 @@ class Store extends EventTarget {
     return result;
   }
 
-  _validateId(id) {
+  validateId(id) {
+    return this._ensureIdIsNumber(id) && this._ensureIdNotInStore(id);
+  }
+
+  _ensureIdNotInStore(id) {
+    if (this._data.has(id)) {
+      throw new Error(`중복된 id입니다: ${id}`);
+    }
+    return true;
+  }
+
+  _ensureIdIsNumber(id) {
     if (typeof id !== "number" || isNaN(id)) {
       throw new TypeError("id는 숫자여야 합니다.");
     }
     return true;
   }
 
-  _validateValue(value) {
+  validateValue(value) {
     if (typeof value !== "number" || isNaN(value)) {
       throw new TypeError("value는 숫자여야 합니다.");
     }
