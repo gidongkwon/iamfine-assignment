@@ -65,11 +65,11 @@ class Store extends EventTarget {
   }
 
   getAsJSON() {
-    return JSON.stringify(
-      [...this._data.entries()].map((v) => ({ id: v[0], value: v[1] })),
-      null,
-      2
-    );
+    return JSON.stringify(this.getAsPairs(), null, 2);
+  }
+
+  getAsPairs() {
+    return [...this._data.entries()].map((v) => ({ id: v[0], value: v[1] }));
   }
 
   /**

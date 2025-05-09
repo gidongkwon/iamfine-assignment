@@ -57,7 +57,32 @@
       </section>
     </main>
 
-    <template id="chart-view-template"> Chart </template>
+    <template id="chart-view-template">
+      <div class="empty">
+        <span>차트에 표시할 데이터를 추가해보세요.</span>
+      </div>
+      <div class="chart" hidden>
+        <div class="y-axis"></div>
+        <div class="x-axis"></div>
+        <div class="bars"></div>
+      </div>
+
+      <template id="x-tick-template">
+        <div class="x-tick">
+          <span></span>
+        </div>
+      </template>
+      <template id="y-tick-template">
+        <div class="y-tick">
+          <span></span>
+        </div>
+      </template>
+      <template id="bar-template">
+        <div class="bar">
+          <span></span>
+        </div>
+      </template>
+    </template>
 
     <template id="editable-table-template">
       <table>

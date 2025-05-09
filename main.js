@@ -7,20 +7,28 @@ const valueInput = document.querySelector("#value-input");
  * @type {EditableTable}
  */
 const editableTable = document.querySelector("#main-table");
+/**
+ * @type {ChartView}
+ */
+const chartView = document.querySelector("chart-view");
 const jsonTextArea = document.querySelector("#json-textarea");
 
+// 이벤트 리스너 연결
 store.addEventListener("added", (e) => {
   editableTable.addRow(e.detail, -1);
   jsonTextArea.value = store.getAsJSON();
+  chartView.update(store.getAsPairs());
 });
 
 store.addEventListener("removed", (e) => {
   editableTable.removeRow(e.detail.id);
   jsonTextArea.value = store.getAsJSON();
+  chartView.update(store.getAsPairs());
 });
 
 store.addEventListener("changed", (e) => {
   jsonTextArea.value = store.getAsJSON();
+  chartView.update(store.getAsPairs());
 });
 
 store.addEventListener("overwritten", (e) => {
@@ -29,6 +37,7 @@ store.addEventListener("overwritten", (e) => {
     editableTable.addRow(pair, -1);
   }
   jsonTextArea.value = store.getAsJSON();
+  chartView.update(e.detail);
 });
 
 editableTable.addEventListener("delete-clicked", (e) => {
