@@ -67,7 +67,11 @@ editableTable.addEventListener("row-changed", () => {
   tableApplyButton.removeAttribute("hidden");
 });
 tableApplyButton.addEventListener("click", () => {
-  store.changeEntries(editableTable.getDirtyRowsAsPair(true));
+  try {
+    store.changeEntries(editableTable.getDirtyRowsAsPair(true));
+  } catch (e) {
+    alert(e.message);
+  }
   tableApplyButton.setAttribute("hidden", "hidden");
 });
 
