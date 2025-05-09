@@ -19,7 +19,7 @@ class Store extends EventTarget {
   }
 
   addEntry(id, value) {
-    if (typeof id !== "number") {
+    if (typeof id !== "number" || isNaN(id)) {
       throw new TypeError("id는 숫자여야 합니다.");
     }
     if (typeof value !== "number" || isNaN(value)) {
