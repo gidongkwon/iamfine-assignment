@@ -1,5 +1,13 @@
 class ChartView extends HTMLElement {
-  Y_AXIS_UNIT = 100;
+  /**
+   * Y축을 표시할 때 그래프 데이터의 최댓값을 올림한 값을 사용하여 축과 막대에
+   * 적절한 영역을 확보하는 데, 이때 어느자리 숫자까지 올림할 지를 지정합니다.
+   */
+  Y_AXIS_CLAMP_UNIT = 100;
+
+  /**
+   * Y축의 tick을 몇 개나 표시할지 지정합니다.
+   */
   Y_AXIS_TICKS = 5;
   connectedCallback() {
     const template = document.getElementById("chart-view-template");
@@ -34,7 +42,7 @@ class ChartView extends HTMLElement {
       const sortedValues = [...pairs.map((x) => x.value)].sort((a, b) => a - b);
       const maxValue = sortedValues.at(-1);
       const clampedMax =
-        Math.ceil(maxValue / this.Y_AXIS_UNIT) * this.Y_AXIS_UNIT;
+        Math.ceil(maxValue / this.Y_AXIS_CLAMP_UNIT) * this.Y_AXIS_CLAMP_UNIT;
       this.drawXAxis(ids);
       this.drawYAxis(clampedMax);
       this.drawBars(values, clampedMax);
