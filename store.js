@@ -22,7 +22,7 @@ class Store extends EventTarget {
     if (typeof id !== "number") {
       throw new TypeError("id는 숫자여야 합니다.");
     }
-    if (typeof value !== "number") {
+    if (typeof value !== "number" || isNaN(value)) {
       throw new TypeError("value는 숫자여야 합니다.");
     }
     if (this._data.has(id)) {

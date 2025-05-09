@@ -45,7 +45,13 @@ editableTable.addEventListener("delete-clicked", (e) => {
 });
 
 addButton.addEventListener("click", () => {
+try {
   store.addEntry(idInput.valueAsNumber, valueInput.valueAsNumber);
+idInput.value = "";
+    valueInput.value = "";
+  } catch (e) {
+    alert(e.message);
+  }
 });
 
 const textAreaApplyButton = document.querySelector("#panel-json .apply-button");
