@@ -49,7 +49,6 @@ addButton.addEventListener("click", () => {
 });
 
 const textAreaApplyButton = document.querySelector("#panel-json .apply-button");
-const tableApplyButton = document.querySelector("#panel-data .apply-button");
 textAreaApplyButton.addEventListener("click", () => {
   try {
     store.setJSON(jsonTextArea.value);
@@ -57,8 +56,13 @@ textAreaApplyButton.addEventListener("click", () => {
     alert(e.message);
   }
 });
+const tableApplyButton = document.querySelector("#panel-data .apply-button");
+editableTable.addEventListener("row-changed", () => {
+  tableApplyButton.removeAttribute("hidden");
+});
 tableApplyButton.addEventListener("click", () => {
   store.changeEntries(editableTable.getDirtyRowsAsPair(true));
+tableApplyButton.setAttribute("hidden", "hidden");
 });
 
 // 탭 처리

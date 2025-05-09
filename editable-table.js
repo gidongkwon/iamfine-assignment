@@ -29,6 +29,13 @@ class EditableTable extends HTMLElement {
     input.addEventListener("change", (e) => {
       this._dirtyIdToValue.set(pair.id, e.target.valueAsNumber);
     });
+    input.addEventListener("input", () => {
+      this.dispatchEvent(
+        new CustomEvent("row-changed", {
+          detail: pair.id,
+        })
+      );
+    });
     td[2].querySelector("button").addEventListener("click", () => {
       this.dispatchEvent(
         new CustomEvent("delete-clicked", {
